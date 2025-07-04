@@ -4,7 +4,7 @@
 #' @param aligned 
 #' @param index 
 #' @param stations 
-#' @param timestep 
+#' @param timestep This parameter is .....
 #'
 #' @return
 #' @export
