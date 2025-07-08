@@ -13,6 +13,27 @@ classify_water_surface <- function(s1_data, rf_model, output_dir = "./RESULTS/Te
   
   # Create output directory if it doesn't exist
   if(!dir.exists(output_dir)) dir.create(output_dir)
+
+  radar_df <- as.data.frame(s1_data, xy = TRUE)
+  
+  # Store NA positions to restore them later
+  na_positions <- which(is.na(radar_df[,3]))
+  
+  # Remove NA values for prediction
+  radar_df_clean <- na.omit(radar_df)
+  
+  # Rename columns to match training data
+  names(radar_df_clean) <- c("X","Y",names(rf_model$model$forest$xlevels))
+  
+  # Predict water surface
+  water_prediction <- predict(s1_data, radar_df_clean, type = "prob")
+  
+  
+  # Create a vector to hold all predictions (including NAs)
+  all_predictions <- rep(NA, nrow(radar_df))
+  all_predictions[-na_positions] <- as.character(water_prediction)
+  
+  
   
   # Predict water surface
   water_prediction <- predict(s1_data, rf_model, type = "prob")
