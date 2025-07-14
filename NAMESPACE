@@ -3,5 +3,6 @@
 export(classify_water_surface)
 export(performWS)
 export(preprocessing_data)
+export(radar_index_stack)
 export(testFUN)
 export(train_rf_model)
