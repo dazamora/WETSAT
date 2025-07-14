@@ -20,6 +20,12 @@ knitr::opts_chunk$set(
 knitr::include_graphics("WETSAT-ML_icon.png", dpi = 200)
 ```
 
+# METHODOLOGY
+
+```{r rstudio-create-pkg2, echo = FALSE}
+knitr::include_graphics("Methodology.png", dpi = 200)
+```
+
 <!-- badges: start -->
 <!-- badges: end -->
 

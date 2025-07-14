@@ -5,6 +5,10 @@
 
 <img src="WETSAT-ML_icon.png" width="100%" />
 
+# METHODOLOGY
+
+<img src="Methodology.png" width="100%" />
+
 <!-- badges: start -->
 <!-- badges: end -->
 
