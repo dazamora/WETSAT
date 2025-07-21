@@ -20,6 +20,12 @@ knitr::opts_chunk$set(
 knitr::include_graphics("WETSAT-ML_icon.png", dpi = 200)
 ```
 
+# METHODOLOGY
+
+```{r rstudio-create-pkg2, echo = FALSE}
+knitr::include_graphics("Methodology.png", dpi = 200)
+```
+
 <!-- badges: start -->
 <!-- badges: end -->
 
@@ -63,7 +69,17 @@ You can also embed plots, for example:
 ```
 
 ## Datasets
+```{r fig.2, echo=FALSE, fig.align= "center", fig.height=1, fig.width=6, dpi = 600}
+par(mar=c(0.6,0.6,0.6,0.6)+0.1)
+plot(0,0, yaxt = "n", xaxt = "n", type = "n",bty= "n", ylab = "", xlab = "")
+text(0,0, labels = expression(italic(paste(frac("ET","P")," = ", "1 + ", frac("PET","P"), 
+                                           " - ", bgroup("[",1 - bgroup("(",frac("PET", "P"), ")")^(frac(1,1+alpha)), "]")^(1+alpha), "  [eq.2]", sep =""))), 
+     cex = 0.9)
+```
 
 ## Disclaimer
+Referencia de prueba @Tolson2007
 
 ## References
+
+

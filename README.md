@@ -5,6 +5,10 @@
 
 <img src="WETSAT-ML_icon.png" width="100%" />
 
+# METHODOLOGY
+
+<img src="Methodology.png" width="100%" />
+
 <!-- badges: start -->
 <!-- badges: end -->
 
@@ -63,6 +67,24 @@ You can also embed plots, for example:
 
 ## Datasets
 
+<img src="README-fig.2-1.png" width="100%" style="display: block; margin: auto;" />
+
 ## Disclaimer
 
+Referencia de prueba Tolson and Shoemaker (2007)
+
 ## References
+
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
+
+<div id="ref-Tolson2007" class="csl-entry">
+
+Tolson, Bryan A, and Christine A Shoemaker. 2007.
+“<span class="nocase">Dynamically dimensioned search algorithm for
+computationally efficient watershed model calibration</span>” 43: 1–16.
+<https://doi.org/10.1029/2005WR004723>.
+
+</div>
+
+</div>

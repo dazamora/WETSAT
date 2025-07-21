@@ -1,6 +1,6 @@
 #' Title
 #'
-#' @param stack.radar 
+#' @param stack.radar This is a stack of images
 #' @param aligned 
 #' @param index 
 #' @param stations 

@@ -7,7 +7,7 @@
 preprocessing_data(stack.radar, aligned, index, stations, timestep)
 }
 \arguments{
-\item{stack.radar}{}
+\item{stack.radar}{This is a stack of images}
 
 \item{aligned}{}
 

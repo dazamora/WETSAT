@@ -7,7 +7,11 @@
 radar_index_stack(VV, VH, index, nameID)
 }
 \arguments{
+<<<<<<< HEAD
 \item{VV}{}
+=======
+\item{VV}{Is the backscatter of the signal transmited and recived vertical}
+>>>>>>> 991fa7e67d056a74acea2130cac016f0099c329d
 
 \item{VH}{}
 
