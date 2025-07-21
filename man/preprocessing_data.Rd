@@ -4,7 +4,7 @@
 \alias{preprocessing_data}
 \title{Title}
 \usage{
-preprocessing_data(stack.radar, aligned, index, stations)
+preprocessing_data(stack.radar, aligned, index, stations, timestep)
 }
 \arguments{
 \item{stack.radar}{}
@@ -14,6 +14,8 @@ preprocessing_data(stack.radar, aligned, index, stations)
 \item{index}{}
 
 \item{stations}{}
+
+\item{timestep}{This parameter is .....}
 }
 \description{
 Title
