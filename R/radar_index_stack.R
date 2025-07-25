@@ -3,7 +3,10 @@
 #' 
 #' @title 
 #' Indexes stack of backscatter and data frame with indexes values by hydrology station
-#'
+#' 
+#' @description
+#' A short description...
+#' 
 #' @param VV is the backscatter of the signal transmitted and recived vertical
 #' @param VH 
 #' @param index  \cite{(Mayer et al., 1974)}
