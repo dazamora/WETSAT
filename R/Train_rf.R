@@ -11,6 +11,8 @@
 #' @param training_data 
 #' @param ntree 
 #' @param por.train 
+#' @param plot.out 
+#' @param print.CM 
 #'
 #' @return
 #' @export
@@ -26,13 +28,47 @@
 #' 
 #' @examples
 #' 
-train_rf_model <- function(training_data, ntree = 500, por.train = 0.7, plot.out) {
+train_rf_model <- function(training_data, ntree = 500, por.train = 0.7, plot.out = TRUE, print.CM = TRUE) {
+  
+  if(is.data.frame(training_data)){
+    
+    cli::cat_line(c("Argument training_data is a data frame"), col = "blue")
+    
+    if(is.factor(training_data[,1])){
+      
+      cli::cli_bullets(c("v" = "The first column is a {.cls {class(training_data[,1])}} class", 
+                         "v" = "Water presence is define as 1 and not presence as 0 = {.cls {summary(training_data[,1])}}."))
+    } else {
+      cli::cli_abort(c(
+        "!" = "The first column of {.arg training_data} must be a factor."))
+    }
+    
+  } else {
+    cli::cli_abort(c(
+      "!" = "{.arg training_data} must be a data frame.",
+      "i" = "You provided an object of class {.cls {class(training_data)}}.",
+      "i" = "Convert using {.fn as.data.frame}."
+    ))
+  }
+  
+  if(!exists("por.train")){
+    por.train <- 0.7
+    cli::cli_bullets(c("!" ="There is not a por.train variable. By default use 70 % of data to calibrate random forest model"))
+  } else {
+    cli::cat_line(paste(por.train*100, " % is used to calibrate", " and ", abs(1 - por.train)*100, " % to validate random forest model.", sep = ""), col = "blue")
+  }
+  
+  if(!exists("ntree")){
+    ntree <- 500
+    cli::cli_bullets(c("!" ="By default the value of {.arg ntree} is 500"))
+  } 
+  
   
   # Split data into training and testing sets
   set.seed(123)
   trainIndex <- caret::createDataPartition(training_data$water, p = por.train, list = FALSE)
-  train_set <- caret::training_data[trainIndex, ]
-  test_set <- caret::training_data[-trainIndex, ]
+  train_set <- training_data[trainIndex, ]
+  test_set <- training_data[-trainIndex, ]
   
   # Train Random Forest model
   rf_model <- randomForest::randomForest(
@@ -47,12 +83,15 @@ train_rf_model <- function(training_data, ntree = 500, por.train = 0.7, plot.out
   conf_matrix <- caret::confusionMatrix(predictions, test_set$water)
   
   # Print model evaluation metrics
-  print(conf_matrix)
-  print(importance(rf_model))
+  if(print.CM){
+    print(conf_matrix)
+    print(randomForest::importance(rf_model))
+  }
   
   # Plot variable importance
   if(plot.out){
     randomForest::varImpPlot(rf_model, main = "Variable Importance")
   }
   return(list(model = rf_model, accuracy = conf_matrix$overall["Accuracy"]))
+  
 }

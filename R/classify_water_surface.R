@@ -11,6 +11,8 @@
 #' 
 classify_water_surface <- function(s1_data, rf_model, output_dir = "./RESULTS/Test") {
   
+  
+  
   # Create output directory if it doesn't exist
   if(!dir.exists(output_dir)) dir.create(output_dir)
 

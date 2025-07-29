@@ -58,7 +58,7 @@ radar_index_stack <- function(VV, VH, index, nameID, station, output, buff){
       NVHI <- VH/(VV + VH)
       NVVI <- VV/(VV + VH)
       RVI <- 4*VH/(VV + VH)
-      out.indexes <- list(PR = PR, NDPI = NDPI, NVHI = NVHI, NVVI = NVVI, RVI = RVI)
+      out.indexes <- list(VV = VV, VH = VH, PR = PR, NDPI = NDPI, NVHI = NVHI, NVVI = NVVI, RVI = RVI)
     } else {
       
       PR <- VH/VV
@@ -70,7 +70,8 @@ radar_index_stack <- function(VV, VH, index, nameID, station, output, buff){
       nam.ind <- c("PR", "NDPI", "NVHI", "NVVI", "RVI")
       select.ind <- is.element(nam.ind, index)
       
-      out.indexes <- list(PR = PR, NDPI = NDPI, NVHI = NVHI, NVVI = NVVI, RVI = RVI)[select.ind]
+      out.pre <- list(PR = PR, NDPI = NDPI, NVHI = NVHI, NVVI = NVVI, RVI = RVI)[select.ind]
+      out.indexes <- list(VV = VV, VH = VH, out.pre) 
     }
   }
   
