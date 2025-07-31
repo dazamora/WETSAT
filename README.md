@@ -3,7 +3,7 @@
 
 # WETSAT
 
-<img src="WETSAT-ML_icon.png" width="100%" />
+<img src="WETSAT-ML_icon.png" width="50%" height="50%" style="display: block; margin: auto;" />
 
 # METHODOLOGY
 
@@ -15,13 +15,7 @@
 In response to the growing global demand for wetland data, and building
 on SEI-Latin America’s previous work, this project aims to develop the
 WetSAT-ML (Wetlands flooding extent and trends using SATellite
-observations and Machine Learning) tool. It consists of an open-source
-algorithm integrated with Google Earth Engine’s cloud platform and
-databases. The tool will process radar satellite data from the
-Sentinel-1 mission to generate wetland flooding extent maps, water
-permanence maps, and quantify key hydrological parameters, including
-flooded area time series, hydroperiods, and intra- and inter-annual
-wetland area trends.
+observations and Machine Learning) tool.
 
 ## Installation
 
@@ -35,7 +29,44 @@ You can install the development version of WETSAT from
 
 ## Concepts behind WETSAT tool
 
+The tool processes radar satellite data from the Sentinel-1 mission to
+generate wetland flooding extent maps, water permanence maps, and
+quantify key hydrological parameters, including flooded area time
+series, hydroperiods, and intra- and inter-annual wetland area trends.
+The algorithm will use machine learning models to characterize the
+scattering behavior of the radar signal for different wetland flooding
+conditions, enabling a pixel-level water detection in the satellite
+images.
+
+In this study we not only included the backscatter observations from VV
+and VH channels but also the indices
+
+<img src="README-fig.3-1.png" width="100%" style="display: block; margin: auto;" />
+
 ## WETSAT tool functions
+
+WETSAT package contains XX functions, most of them have a practical
+example about their usage. The functions are:
+
+- `radar_index_stack`: XXXXXX
+- `train_rf_model`: XXXXXX
+- `classify_water_surface`: XXXXXX
+- `performWS`: XXXXXX
+
+## Dataset
+
+The Everglades region is located in southern Florida, and it extends
+over an area of 9,150 km2 from the margin of Florida Bay in the south to
+the Everglades Agricultural Area (EAA) in the north (Figure 1). The area
+supports a diverse mosaic of different wetlands, including freshwater
+marshes, swamps, sloughs, and wet prairies (Figure 1a). The area also
+presents diverse vegetation communities where the sawgrass (especially
+Cladium jamaicense) is the most abundant, interspersed with patches of
+shrubs with a mix of swamp and bayhead shrub species, and trees with a
+mix of swamp, hammock, and bayhead tree species *Palomino-Ángel,
+Wdowinski, and Li (2024)*.
+
+<img src="Study_area.png" width="50%" height="50%" style="display: block; margin: auto;" />
 
 ## Example
 
@@ -71,19 +102,19 @@ You can also embed plots, for example:
 
 ## Disclaimer
 
-Referencia de prueba Tolson and Shoemaker (2007)
-
 ## References
 
 <div id="refs" class="references csl-bib-body hanging-indent"
 entry-spacing="0">
 
-<div id="ref-Tolson2007" class="csl-entry">
+<div id="ref-palomino2024" class="csl-entry">
 
-Tolson, Bryan A, and Christine A Shoemaker. 2007.
-“<span class="nocase">Dynamically dimensioned search algorithm for
-computationally efficient watershed model calibration</span>” 43: 1–16.
-<https://doi.org/10.1029/2005WR004723>.
+Palomino-Ángel, Sebastián, Shimon Wdowinski, and Shanshan Li. 2024.
+“Wetlands Water Level Measurements from the New Generation of Satellite
+Laser Altimeters: Systematic Spatial-Temporal Evaluation of ICESat-2 and
+GEDI Missions over the South Florida Everglades.” *Water Resources
+Research* 60 (3): e2023WR035422.
+https://doi.org/<https://doi.org/10.1029/2023WR035422>.
 
 </div>
 

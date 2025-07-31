@@ -16,8 +16,9 @@ knitr::opts_chunk$set(
 
 # WETSAT
 
-```{r rstudio-create-pkg, echo = FALSE}
-knitr::include_graphics("WETSAT-ML_icon.png", dpi = 200)
+```{r rstudio-create-pkg, out.width="50%", out.height="50%", fig.align = "center", echo=FALSE}
+knitr::include_graphics("WETSAT-ML_icon.png")
+
 ```
 
 # METHODOLOGY
@@ -29,7 +30,7 @@ knitr::include_graphics("Methodology.png", dpi = 200)
 <!-- badges: start -->
 <!-- badges: end -->
 
-In response to the growing global demand for wetland data, and building on SEI-Latin America’s previous work, this project aims to develop the WetSAT-ML (Wetlands flooding extent and trends using SATellite observations and Machine Learning) tool. It consists of an open-source algorithm integrated with Google Earth Engine’s cloud platform and databases. The tool will process radar satellite data from the Sentinel-1 mission to generate wetland flooding extent maps, water permanence maps, and quantify key hydrological parameters, including flooded area time series, hydroperiods, and intra- and inter-annual wetland area trends.
+In response to the growing global demand for wetland data, and building on SEI-Latin America’s previous work, this project aims to develop the WetSAT-ML (Wetlands flooding extent and trends using SATellite observations and Machine Learning) tool. 
 
 ## Installation
 
@@ -41,9 +42,46 @@ You can install the development version of WETSAT from [GitHub](https://github.c
 ```
 
 ## Concepts behind WETSAT tool
+The tool  processes radar satellite data from the Sentinel-1 mission to generate wetland flooding extent maps, water permanence maps, and quantify key hydrological parameters, including flooded area time series, hydroperiods, and intra- and inter-annual wetland area trends. The algorithm will use machine learning models to characterize the scattering behavior of the radar signal for different wetland flooding conditions, enabling a pixel-level water detection in the satellite images.
 
+In this study we not only included the backscatter observations from VV and VH channels but also the indices 
+
+```{r fig.3, echo=FALSE, fig.align= "center", fig.height=4, fig.width=6, dpi = 600}
+name.index <- c("Polarized Ratio (PR) - ", "Normalized Difference Polarized Index (NDPI)",
+                "Normalized VH Index (NVHI)", "Normalized VV Index (NVVI)", 
+                "Radar Vegetation Index (RVI)")
+equations <- c(expression(italic(paste(frac(sigma[VH]^0,sigma[VV]^0), sep = ""))),
+               expression(italic(paste(frac(sigma[VV]^0 - sigma[VH]^0,sigma[VV]^0 + sigma[VV]^0), sep =""))), expression(italic(paste(frac(sigma[VH]^0, sigma[VV]^0 + sigma[VV]^0), sep = ""))),
+               expression(italic(paste(frac(sigma[VV]^0, sigma[VV]^0 + sigma[VV]^0)), sep="")),
+               expression(italic(paste(frac(4*sigma[VH]^0, sigma[VV]^0 + sigma[VV]^0)), sep="")))
+
+par(mar=c(0.6,0.6,0.6,0.6)+0.1)
+plot(0:4,c(1:5), yaxt = "n", xaxt = "n", type = "n",bty= "n", ylab = "", xlab = "", ylim = c(0, 6))
+text(rep(0,5),c(1:5),labels = name.index, adj = c(0, 0.1), font = 2)
+text(rep(3,5),c(1:5),labels = equations, adj = c(0, 0.1), cex = 0.8) 
+
+```    
 
 ## WETSAT tool functions
+WETSAT package contains XX functions, most of them have a practical example about their usage. The functions are:
+
+* `radar_index_stack`: XXXXXX
+* `train_rf_model`: XXXXXX
+* `classify_water_surface`: XXXXXX
+* `performWS`: XXXXXX
+
+
+```{r eval=FALSE, include=TRUE}
+
+```
+
+## Dataset
+The Everglades region is located in southern Florida, and it extends over an area of 9,150 km2 from the margin of Florida Bay in the south to the Everglades Agricultural Area (EAA) in the north (Figure 1). The area supports a diverse mosaic of different wetlands, including freshwater marshes, swamps, sloughs, and wet prairies (Figure 1a). The area also presents diverse vegetation communities where the sawgrass (especially Cladium jamaicense) is the most abundant, interspersed with patches of shrubs with a mix of swamp and bayhead shrub species, and trees with a mix of swamp, hammock, and bayhead tree species *@palomino2024*.
+
+```{r rstudio-create-pkg3, out.width="50%", out.height="50%", fig.align = "center", echo = FALSE}
+knitr::include_graphics("Study_area.png", dpi = 200)
+
+```
 
 ## Example
 
@@ -78,7 +116,7 @@ text(0,0, labels = expression(italic(paste(frac("ET","P")," = ", "1 + ", frac("P
 ```
 
 ## Disclaimer
-Referencia de prueba @Tolson2007
+
 
 ## References
 

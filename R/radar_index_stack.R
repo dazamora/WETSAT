@@ -11,6 +11,9 @@
 #' @param VH 
 #' @param index  \cite{(Mayer et al., 1974)}
 #' @param nameID 
+#' @param station 
+#' @param output 
+#' @param buff 
 #'
 #' @return
 #' @export
@@ -26,7 +29,7 @@
 #' 
 #' @examples
 #' 
-radar_index_stack <- function(VV, VH, index, nameID, station, output, buff){
+radar_index_stack <- function(VV, VH, index, nameID, station, buff){
   
   if(!(raster::nlayers(VV) == raster::nlayers(VH))){
     cat("Backscatter variables have same number of layers")

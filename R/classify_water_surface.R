@@ -11,8 +11,6 @@
 #' 
 classify_water_surface <- function(s1_data, rf_model, output_dir = "./RESULTS/Test") {
   
-  
-  
   # Create output directory if it doesn't exist
   if(!dir.exists(output_dir)) dir.create(output_dir)
 
@@ -29,7 +27,6 @@ classify_water_surface <- function(s1_data, rf_model, output_dir = "./RESULTS/Te
   
   # Predict water surface
   water_prediction <- predict(s1_data, radar_df_clean, type = "prob")
-  
   
   # Create a vector to hold all predictions (including NAs)
   all_predictions <- rep(NA, nrow(radar_df))

@@ -1,6 +1,6 @@
 Package: WETSAT
 Title: Wetlands flooding extent and trends using SATellite observations and Machine Learning
-Version: 0.0.0.9000
+Version: 0.0.0.1000
 Authors@R: 
     c(person("Sebastian ", "Palomino", , "sebastian.palomino@sei.org", role = c("aut"),
            comment = c(ORCID = "0000-0001-6970-9075"),

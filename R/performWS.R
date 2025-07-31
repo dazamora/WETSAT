@@ -8,7 +8,7 @@
 #' @export
 #'
 #' @examples
-performWS <- function(A, B, C){
+performWS <- function(model.rf = , data.val = , data.cal =  ){
   
   
   # Read validation data
@@ -38,6 +38,8 @@ performWS <- function(A, B, C){
   # --- 4. Métricas de Evaluación ---
   
   # 4.1. Matriz de Confusión
+  
+  
   confusion_matrix <- confusionMatrix(predictions_class, test_data$Target)
   print("--- Matriz de Confusión ---")
   print(confusion_matrix)
