@@ -36,7 +36,7 @@ series, hydroperiods, and intra- and inter-annual wetland area trends.
 The algorithm will use machine learning models to characterize the
 scattering behavior of the radar signal for different wetland flooding
 conditions, enabling a pixel-level water detection in the satellite
-images.
+images Huang et al. (2018).
 
 In this study we not only included the backscatter observations from VV
 and VH channels but also the indices
@@ -106,6 +106,15 @@ You can also embed plots, for example:
 
 <div id="refs" class="references csl-bib-body hanging-indent"
 entry-spacing="0">
+
+<div id="ref-rs10050797" class="csl-entry">
+
+Huang, Wenli, Ben DeVries, Chengquan Huang, Megan W. Lang, John W.
+Jones, Irena F. Creed, and Mark L. Carroll. 2018. “Automated Extraction
+of Surface Water Extent from Sentinel-1 Data.” *Remote Sensing* 10 (5).
+<https://doi.org/10.3390/rs10050797>.
+
+</div>
 
 <div id="ref-palomino2024" class="csl-entry">
 

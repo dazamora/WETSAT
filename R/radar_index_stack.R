@@ -32,16 +32,17 @@
 radar_index_stack <- function(VV, VH, index, nameID, station, buff){
   
   if(!(raster::nlayers(VV) == raster::nlayers(VH))){
-    cat("Backscatter variables have same number of layers")
+    cli::cat_line("Backscatter variables have same number of layers", col = "blue")
   } else {
-    stop("Backscatter variables have different number of layers or VV-VH are not raster format")  
+    cli::cli_abort(c("x"="Backscatter variables have different number of layers or VV-VH are not raster format"))  
   }
   
   if(exists("index")){
     if(is.character(index)){
-        cat(paste("The following indices will be calculated: ", index, sep = ""))
+      cli::cat_line("The following indices will be calculated: ", col = "blue")
+      cli::cat_bullet(paste(index, sep=""), col = "aquamarine4")
     } else {
-      stop("The index must be a vector of characters with at least a the index name")
+      cli::cli_abort(c("x" = "The index must be a vector of characters with at least a the index name"))
     }
   } else {
     index <- c("PR", "NDPI", "NVHI", "NVVI", "RVI")
@@ -49,7 +50,7 @@ radar_index_stack <- function(VV, VH, index, nameID, station, buff){
   
   if(raster::nlayers(VV) > 1){
     if(!class(VV)[1] == "RasterStack"){
-      
+      cli::cat_line("The following indices will be calculated: ", col = "blue")
     }
       
       
