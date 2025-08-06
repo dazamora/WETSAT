@@ -16,7 +16,8 @@ Imports:
 caret,
 randomForest,
 raster,
-sf
+sf,
+pROC
 Suggests: 
     knitr,
     rmarkdown

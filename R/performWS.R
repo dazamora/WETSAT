@@ -1,60 +1,108 @@
 #' Title
 #'
-#' @param A 
-#' @param B 
-#' @param C 
+#' @param rf_model 
+#' @param data.val 
+#' @param data.cal 
+#' @param training_data 
 #'
 #' @return
 #' @export
 #'
 #' @examples
-performWS <- function(model.rf = , data.val = , data.cal =  ){
+performWS <- function(rf_model, training_data, data.val, data.cal){
+  
+  if(class(rf_model)[2]=="randomForest"){
+    cli::cli_bullets(c("v"= "The first column is a {.cls {class(model.rf)[2]}} class"))
+    cli::cli_h1("Random Forest Model Information \n The model has been trained with the following parameters:")
+    cli::cat_print(rownames(rf_model$importance))
+  } else{
+    cli::cli_abort(c(
+      "!" = "{.arg model.rf} must be a randomForest object.",
+      "i" = "You provided an object of class {.cls {class(model.rf)}}."
+      ))
+  }
+  
+if(exists("training_data")){
+  if(is.data.frame(training_data)){
+    } else {
+      cli::cli_abort(c("!" = "You provided an object {.arg training_data} of {.cls {class(training_data)}} class."),
+                     c("i" = "{.arg training_data} must be a data frame object."))
+    }
+} else {
+  cli::cli_abort(c("i" = "You must provided an {.arg training_data}."))
+}
+  
+  if(exists("data.cal") & exists("data.val")){
+    cli::cat_line(c("Argument data.cal and data.val are defined"), col = "blue")
+    
+    if(is.numeric(data.cal) & is.numeric(data.val)){
+      cli::cat_line(c("Argument data.cal and data.val are numeric vectors"), col = "blue")
+    } else {
+      cli::cli_abort(c( "i" = "You provided an objects {.arg data.cal} and {.arg data.val} of class {.cls {class(data.cal)}}."))
+    }
+    cal_data <- training_data[data.cal, ]
+    val_data <- training_data[data.val, ]
+  } else if(exists(data.cal) & !data.val){
+    if(is.numeric(data.cal)){
+      cli::cat_line(c("Argument data.cal is numeric vector"), col = "blue")
+    } else {
+      cli::cli_abort(c( "i" = "You provided an object {.arg data.cal} of {.cls {class(data.cal)}} class."))
+    }
+    cal_data <- training_data[data.cal, ]
+    val_data <- training_data[-data.cal, ]
+  } else {
+    cli::cli_abort(c(
+      "!" = "{.arg data.cal} and {.arg data.val} must be defined.",
+      "i" = "You provided an object of class {.cls {class(data.cal)}} and {.cls {class(data.val)}}."
+    ))
+  }
+  
+
+  pred_probs.cal <- predict(rf_model, cal_data, type = "prob")[,2]
+  pred_class.cal <- predict(rf_model, cal_data, type = "response")
+  
+  pred_probs.val <- predict(rf_model, val_data, type = "prob")[,2]
+  pred_class.val <- predict(rf_model, val_data, type = "response")
+  
+  conf_mat.cal <- caret::confusionMatrix(pred_class.cal, cal_data$water, positive = levels(cal_data$water)[2])
+  conf_mat.val <- caret::confusionMatrix(pred_class.val, val_data$water, positive = levels(val_data$water)[2])
+  print(conf_mat.val)
+  
+  roc_obj.cal <- pROC::roc(cal_data$water, pred_probs.cal, levels = rev(levels(cal_data$water)))
+  auc_value.cal <- pROC::auc(roc_obj.cal)
+  
+  roc_obj.val <- pROC::roc(val_data$water, pred_probs.val, levels = rev(levels(val_data$water)))
+  auc_value.val <- pROC::auc(roc_obj.val)
+  
+  plot(roc_obj.cal, col = "blue", main = sprintf("ROC Curve (AUC = %.2f)", pROC::auc(roc_obj.cal)))
+  abline(a = 0, b = 1, lty = 2, col = "gray")
   
   
-  # Read validation data
-  validation <- st_read(validation_file)
-  validation_sp <- as(validation, "Spatial")
+  plot(roc_obj.val, col = "blue", main = sprintf("ROC Curve (AUC = %.2f)", pROC::auc(roc_obj.val)))
+  abline(a = 0, b = 1, lty = 2, col = "gray")
   
-  # Extract predicted values at validation points
-  predicted <- extract(water_mask, validation_sp)
-  
-  # Get actual values from validation data
-  actual <- validation$class
-  
-  # Create confusion matrix
-  conf_matrix <- confusionMatrix(
-    as.factor(predicted), 
-    as.factor(actual),
-    positive = "1"
-  )
-  
-  return(conf_matrix)
-  
-  
-  # --- 3. Predicciones ---
-  predictions_class <- predict(rf_model, newdata = test_data)
-  predictions_prob <- predict(rf_model, newdata = test_data, type = "prob") # Probabilidades para la curva ROC
-  
-  # --- 4. Métricas de Evaluación ---
-  
-  # 4.1. Matriz de Confusión
-  
-  
-  confusion_matrix <- confusionMatrix(predictions_class, test_data$Target)
-  print("--- Matriz de Confusión ---")
-  print(confusion_matrix)
-  
-  # Métricas clave de la matriz de confusión:
   # Accuracy: Precisión general del modelo
-  accuracy <- confusion_matrix$overall["Accuracy"]
+  accuracy.cal <- conf_mat.cal$overall["Accuracy"]
   # Sensitivity (Recall): Tasa de verdaderos positivos para cada clase
-  sensitivity <- confusion_matrix$byClass["Sensitivity"]
+  sensitivity.cal <- conf_mat.cal$byClass["Sensitivity"]
   # Specificity: Tasa de verdaderos negativos para cada clase
-  specificity <- confusion_matrix$byClass["Specificity"]
+  specificity.cal <- conf_mat.cal$byClass["Specificity"]
   # Precision: Proporción de verdaderos positivos sobre los clasificados como positivos
-  precision <- confusion_matrix$byClass["Precision"]
+  precision.cal <- conf_mat.cal$byClass["Precision"]
   # F1-Score: Media armónica de precisión y recall
-  f1_score <- confusion_matrix$byClass["F1"]
+  f1_score.cal <- conf_mat.cal$byClass["F1"]
+  
+  performance.cal <- c(accuracy.cal, sensitivity.cal, specificity.cal, precision.cal, f1_score.cal)
+  
+  
+  accuracy.val <- conf_mat.val$overall["Accuracy"]
+  sensitivity.val <- conf_mat.val$byClass["Sensitivity"]
+  specificity.val <- conf_mat.val$byClass["Specificity"]
+  precision.val <- conf_mat.val$byClass["Precision"]
+  f1_score.val <- conf_mat.val$byClass["F1"]
+  
+  performance.val <- c(accuracy.val, sensitivity.val, specificity.val, precision.val, f1_score.val)
+  
   
   cat("\n--- Métricas Derivadas de la Matriz de Confusión ---\n")
   cat("Accuracy:", accuracy, "\n")
@@ -64,13 +112,6 @@ performWS <- function(model.rf = , data.val = , data.cal =  ){
   cat("F1-Score (Class Yes):", f1_score["Class: Yes"], "\n")
   
   
-  # 4.2. AUC-ROC (Area Under the Receiver Operating Characteristic Curve)
-  # Para clasificación binaria, es una métrica muy importante
-  # Asegúrate de que la clase positiva esté en la segunda columna de predictions_prob
-  roc_obj <- roc(response = test_data$Target, predictor = predictions_prob[, "Yes"])
-  auc_value <- auc(roc_obj)
-  cat("\n--- AUC (Area Under the Curve) ---\n")
-  cat("AUC:", auc_value, "\n")
-  
+return()
   
 }
