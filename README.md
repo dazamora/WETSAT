@@ -1,9 +1,27 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# WETSAT
+# WetSAT-ML
 
+<!-- <img src="WETSAT-ML_icon.png" alt="Logo" width="40"/> **W**etlands flooding **e**xtent and **t**rends using **SAT**ellite data and **M**achine **L**earning 
+Esta linea es un ensayo para incluir el logo al lado del título
+-->
+<table>
+<tr>
+<td>
+<img src="WETSAT-ML_icon.png" alt="Logo" width="120">
+</td>
+<td style="vertical-align: middle; padding-left: 18px;">
+<span style="font-size: 20px;"> <strong>W</strong>etlands flooding
+<strong>e</strong>xtent and <strong>t</strong>rends using
+<strong>SAT</strong>ellite data and <strong>M</strong>achine
+<strong>L</strong>earning </span>
+</td>
+</tr>
+</table>
+<!-- El siguiente fragmento es para incluir la imagen del logo grande en el readme, lo tengo comentado porque lo incluí arriba en el titulo
 <img src="WETSAT-ML_icon.png" width="50%" height="50%" style="display: block; margin: auto;" />
+ -->
 
 # METHODOLOGY
 
