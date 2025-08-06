@@ -6,6 +6,9 @@
 <!-- <img src="WETSAT-ML_icon.png" alt="Logo" width="40"/> **W**etlands flooding **e**xtent and **t**rends using **SAT**ellite data and **M**achine **L**earning 
 Esta linea es un ensayo para incluir el logo al lado del título
 -->
+
+<div align="center">
+
 <table>
 <tr>
 <td>
@@ -19,6 +22,9 @@ Esta linea es un ensayo para incluir el logo al lado del título
 </td>
 </tr>
 </table>
+
+</div>
+
 <!-- El siguiente fragmento es para incluir la imagen del logo grande en el readme, lo tengo comentado porque lo incluí arriba en el titulo
 <img src="WETSAT-ML_icon.png" width="50%" height="50%" style="display: block; margin: auto;" />
  -->

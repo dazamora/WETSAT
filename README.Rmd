@@ -19,6 +19,8 @@ knitr::opts_chunk$set(
 Esta linea es un ensayo para incluir el logo al lado del título
 -->
 
+<div align="center">
+
 <table>
 <tr>
   <td><img src="WETSAT-ML_icon.png" alt="Logo" width="120"></td>
@@ -29,6 +31,8 @@ Esta linea es un ensayo para incluir el logo al lado del título
   </td>
 </tr>
 </table>
+
+</div>
 
 <!-- El siguiente fragmento es para incluir la imagen del logo grande en el readme, lo tengo comentado porque lo incluí arriba en el titulo
 ```{r rstudio-create-pkg, out.width="50%", out.height="50%", fig.align = "center", echo=FALSE}
