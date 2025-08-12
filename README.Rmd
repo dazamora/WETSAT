@@ -23,12 +23,19 @@ Esta linea es un ensayo para incluir el logo al lado del título
 
 <table>
 <tr>
-  <td><img src="WETSAT-ML_icon.png" alt="Logo" width="120"></td>
-  <td style="vertical-align: middle; padding-left: 18px;">
+  <!-- Imagen izquierda -->
+  <td><img src="WETSAT-ML_icon.png" alt="Logo WetSAT-ML" width="120"></td>
+  
+  <!-- Texto central -->
+  <td align="center" style="vertical-align: middle; padding-left: 18px; padding-right: 18px; text-align: center;">
     <span style="font-size: 20px;">
-      <strong>W</strong>etlands flooding <strong>e</strong>xtent and <strong>t</strong>rends using <strong>SAT</strong>ellite data and <strong>M</strong>achine <strong>L</strong>earning
+      <strong>W</strong>etlands flooding <strong>e</strong>xtent and <strong>t</strong>rends using 
+      <strong>SAT</strong>ellite data and <strong>M</strong>achine <strong>L</strong>earning
     </span>
   </td>
+  
+  <!-- Imagen derecha -->
+  <td><img src="LOGO_SEI.png" alt="Logo SEI" width="120"></td>
 </tr>
 </table>
 
