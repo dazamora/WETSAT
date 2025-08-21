@@ -13,6 +13,7 @@
 #' @param por.train 
 #' @param plot.out 
 #' @param print.CM 
+#' @param mtry 
 #'
 #' @return
 #' @export
@@ -28,7 +29,7 @@
 #' 
 #' @examples
 #' 
-train_rf_model <- function(training_data, ntree = 500, por.train = 0.7, plot.out = TRUE, print.CM = TRUE) {
+train_rf_model <- function(training_data, ntree = 500, por.train = 0.7, mtry = 3, plot.out = TRUE, print.CM = TRUE) {
   
   
   training_data$water <- vector(runif(20,0,1))
@@ -78,7 +79,9 @@ train_rf_model <- function(training_data, ntree = 500, por.train = 0.7, plot.out
     water ~ ., 
     data = train_set,
     ntree = ntree,
-    importance = TRUE
+    mtry = mtry,
+    importance = TRUE,
+    proximity = TRUE
   )
   
   # Evaluate model on test set
