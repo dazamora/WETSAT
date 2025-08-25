@@ -32,8 +32,6 @@
 train_rf_model <- function(training_data, ntree = 500, por.train = 0.7, mtry = 3, plot.out = TRUE, print.CM = TRUE) {
   
   
-  training_data$water <- vector(runif(20,0,1))
-  
   if(is.data.frame(training_data)){
     
     cli::cat_line(c("Argument training_data is a data frame"), col = "blue")
@@ -98,6 +96,6 @@ train_rf_model <- function(training_data, ntree = 500, por.train = 0.7, mtry = 3
   if(plot.out){
     randomForest::varImpPlot(rf_model, main = "Variable Importance")
   }
-  return(list(model = rf_model, accuracy = conf_matrix$overall["Accuracy"]), training.set = trainIndex, test.set = )
+  return(list(model = rf_model, accuracy = conf_matrix$overall["Accuracy"], training.set = trainIndex))
   
 }
