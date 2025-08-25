@@ -10,9 +10,7 @@
 #' @param VV is the backscatter of the signal transmitted and recived vertical
 #' @param VH 
 #' @param index  \cite{(Mayer et al., 1974)}
-#' @param nameID 
 #' @param station 
-#' @param output 
 #' @param buff 
 #'
 #' @return
@@ -29,9 +27,9 @@
 #' 
 #' @examples
 #' 
-radar_index_stack <- function(VV, VH, index, nameID, station, buff){
+radar_index_stack <- function(VV, VH, index, station, buff){
   
-  if(!(raster::nlayers(VV) == raster::nlayers(VH))){
+  if((raster::nlayers(VV) == raster::nlayers(VH))){
     cli::cat_line("Backscatter variables have same number of layers", col = "blue")
   } else {
     cli::cli_abort(c("x"="Backscatter variables have different number of layers or VV-VH are not raster format"))  
@@ -49,11 +47,16 @@ radar_index_stack <- function(VV, VH, index, nameID, station, buff){
   }
   
   if(raster::nlayers(VV) > 1){
-    if(!class(VV)[1] == "RasterStack"){
+    if(!(class(VV)[1] == "RasterStack")){
       cli::cat_line("The following indices will be calculated: ", col = "blue")
     }
-      
-      
+    PR <- VH/VV
+    NDPI <- (VV - VH)/(VV + VH)
+    NVHI <- VH/(VV + VH)
+    NVVI <- VV/(VV + VH)
+    RVI <- 4*VH/(VV + VH)
+    out.indexes <- list(VV = VV, VH = VH, PR = PR, NDPI = NDPI, NVHI = NVHI, NVVI = NVVI, RVI = RVI)
+    
   } else {
     if(length(index) == 5){
       
@@ -78,9 +81,6 @@ radar_index_stack <- function(VV, VH, index, nameID, station, buff){
       out.indexes <- list(VV = VV, VH = VH, out.pre) 
     }
   }
-  
-  points_vect.rp <- st_transform(points_vect, crs = "+proj=utm +zone=17 +datum=WGS84 +units=m +no_defs")
-  
   
   if(exists("station")){
     
