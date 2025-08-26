@@ -64,11 +64,11 @@ The algorithm combines radar backscatter from VV and VH polarizations with five 
 
 | Index | Formula |
 |-------|--------|
-| **PR - Polarized Ratio**   | $\displaystyle \frac{\sigma^{0}_{VH}}{\sigma^{0}_{VV}}$ |
-| **NDPI - Normalized Difference Polarized Index** | $\displaystyle \frac{\sigma^{0}_{VV} - \sigma^{0}_{VH}}{\sigma^{0}_{VV} + \sigma^{0}_{VH}}$ |
-| **NVHI - Normalized VH Index** | $\displaystyle \frac{\sigma^{0}_{VH}}{\sigma^{0}_{VV} + \sigma^{0}_{VH}}$ |
-| **NVVI - Normalized VV Index** | $\displaystyle \frac{\sigma^{0}_{VV}}{\sigma^{0}_{VV} + \sigma^{0}_{VH}}$ |
-| **RVI - Radar Vegetation Index**  | $\displaystyle \frac{4 \cdot \sigma^{0}_{VH}}{\sigma^{0}_{VV} + \sigma^{0}_{VH}}$ |
+| **PR - Polarized Ratio**   | σ<sub>VH</sub><sup>0</sup> / σ<sub>VV</sub><sup>0</sup> |
+| **NDPI - Normalized Difference Polarized Index** | (σ<sub>VV</sub><sup>0</sup> − σ<sub>VH</sub><sup>0</sup>) / (σ<sub>VV</sub><sup>0</sup> + σ<sub>VH</sub><sup>0</sup>) |
+| **NVHI - Normalized VH Index** | σ<sub>VH</sub><sup>0</sup> / (σ<sub>VV</sub><sup>0</sup> + σ<sub>VH</sub><sup>0</sup>) |
+| **NVVI - Normalized VV Index** | σ<sub>VV</sub><sup>0</sup> / (σ<sub>VV</sub><sup>0</sup> + σ<sub>VH</sub><sup>0</sup>) |
+| **RVI - Radar Vegetation Index** | 4 · σ<sub>VH</sub><sup>0</sup> / (σ<sub>VV</sub><sup>0</sup> + σ<sub>VH</sub><sup>0</sup>) |
 
 These indices characterize the scattering behavior of radar signals under different wetland flooding conditions, enabling pixel-level water detection.
 
