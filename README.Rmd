@@ -14,7 +14,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-
 <div align="center">
 
 <table>
@@ -63,40 +62,13 @@ WetSAT-ML uses Sentinel-1 Synthetic Aperture Radar (SAR) data to map water exten
 
 The algorithm combines radar backscatter from VV and VH polarizations with five radar-derived indices:
 
-<div style="font-size:100%; width:100%; margin:auto;">
-
-<table style="width:100%; font-size:100%; table-layout:fixed; word-wrap:break-word;">
-<thead>
-<tr>
-<th style="text-align:center;">Index</th>
-<th style="text-align:center;">Formula</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">PR - Polarized Ratio</td>
-<td style="text-align:center;">$\displaystyle \frac{\sigma^{0}_{VH}}{\sigma^{0}_{VV}}$</td>
-</tr>
-<tr>
-<td style="text-align:left;">NDPI - Normalized Difference Polarized Index</td>
-<td style="text-align:center;">$\displaystyle \frac{\sigma^{0}_{VV} - \sigma^{0}_{VH}}{\sigma^{0}_{VV} + \sigma^{0}_{VH}}$</td>
-</tr>
-<tr>
-<td style="text-align:left;">NVHI - Normalized VH Index</td>
-<td style="text-align:center;">$\displaystyle \frac{\sigma^{0}_{VH}}{\sigma^{0}_{VV} + \sigma^{0}_{VH}}$</td>
-</tr>
-<tr>
-<td style="text-align:left;">NVVI - Normalized VV Index</td>
-<td style="text-align:center;">$\displaystyle \frac{\sigma^{0}_{VV}}{\sigma^{0}_{VV} + \sigma^{0}_{VH}}$</td>
-</tr>
-<tr>
-<td style="text-align:left;">RVI - Radar Vegetation Index</td>
-<td style="text-align:center;">$\displaystyle \frac{4 \cdot \sigma^{0}_{VH}}{\sigma^{0}_{VV} + \sigma^{0}_{VH}}$</td>
-</tr>
-</tbody>
-</table>
-
-</div>
+| Index | Formula |
+|-------|--------|
+| **PR - Polarized Ratio**   | $\displaystyle \frac{\sigma^{0}_{VH}}{\sigma^{0}_{VV}}$ |
+| **NDPI - Normalized Difference Polarized Index** | $\displaystyle \frac{\sigma^{0}_{VV} - \sigma^{0}_{VH}}{\sigma^{0}_{VV} + \sigma^{0}_{VH}}$ |
+| **NVHI - Normalized VH Index** | $\displaystyle \frac{\sigma^{0}_{VH}}{\sigma^{0}_{VV} + \sigma^{0}_{VH}}$ |
+| **NVVI - Normalized VV Index** | $\displaystyle \frac{\sigma^{0}_{VV}}{\sigma^{0}_{VV} + \sigma^{0}_{VH}}$ |
+| **RVI - Radar Vegetation Index**  | $\displaystyle \frac{4 \cdot \sigma^{0}_{VH}}{\sigma^{0}_{VV} + \sigma^{0}_{VH}}$ |
 
 These indices characterize the scattering behavior of radar signals under different wetland flooding conditions, enabling pixel-level water detection.
 
