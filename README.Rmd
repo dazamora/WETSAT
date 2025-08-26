@@ -14,10 +14,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-# WetSAT-ML
-<!-- <img src="WETSAT-ML_icon.png" alt="Logo" width="40"/> **W**etlands flooding **e**xtent and **t**rends using **SAT**ellite data and **M**achine **L**earning 
-Esta linea es un ensayo para incluir el logo al lado del título
--->
 
 <div align="center">
 
@@ -28,7 +24,12 @@ Esta linea es un ensayo para incluir el logo al lado del título
   
   <!-- Texto central -->
   <td align="center" style="vertical-align: middle; padding-left: 18px; padding-right: 18px; text-align: center;">
-    <span style="font-size: 20px;">
+    <!-- Nuevo título arriba -->
+    <span style="font-size: 40px; font-weight: bold; display: block; margin-bottom: 6px;">
+      WetSAT-ML
+    </span>
+    <!-- Frase original abajo -->
+    <span style="font-size: 18px;">
       <strong>W</strong>etlands flooding <strong>e</strong>xtent and <strong>t</strong>rends using 
       <strong>SAT</strong>ellite data and <strong>M</strong>achine <strong>L</strong>earning
     </span>
@@ -41,67 +42,85 @@ Esta linea es un ensayo para incluir el logo al lado del título
 
 </div>
 
-<!-- El siguiente fragmento es para incluir la imagen del logo grande en el readme, lo tengo comentado porque lo incluí arriba en el titulo
-```{r rstudio-create-pkg, out.width="50%", out.height="50%", fig.align = "center", echo=FALSE}
-knitr::include_graphics("WETSAT-ML_icon.png")
+## Methodology
 
-```
- -->
- 
-# METHODOLOGY
+WetSAT-ML (Wetlands flooding extent and trends using SATellite data and Machine Learning) is an open-source R package developed by SEI Latin America.
+It enables monitoring of wetland flooding dynamics using Sentinel-1 radar imagery combined with machine learning algorithms.
 
+The tool integrates with Google Earth Engine and allows users to:
 
+* Generate wetland flooding extent maps.
+* Produce water permanence maps.
+* Extract flooded area time series.
+* Quantify intra-annual and inter-annual wetland hydrological trends. 
 
-```{r rstudio-create-pkg2, echo = FALSE}
+```{r rstudio-create-pkg2, echo = FALSE, fig.align = "left", fig.cap = "Figure 1. WetSAT-ML methodology workflow for generating wetland flooding extent and trends using Sentinel-1 data and machine learning."}
 knitr::include_graphics("Methodology.png", dpi = 200)
 ```
 
-<!-- badges: start -->
-<!-- badges: end -->
+## Concepts behind the WetSAT-ML tool
+WetSAT-ML uses Sentinel-1 Synthetic Aperture Radar (SAR) data to map water extent, overcoming the limitations of optical data, which often fail in cloudy or dense vegetation conditions.
 
-In response to the growing global demand for wetland data, and building on SEI-Latin America’s previous work, this project aims to develop the WetSAT-ML (Wetlands flooding extent and trends using SATellite observations and Machine Learning) tool. 
+The algorithm combines radar backscatter from VV and VH polarizations with five radar-derived indices:
+
+<div style="font-size:100%; width:100%; margin:auto;">
+
+<table style="width:100%; font-size:100%; table-layout:fixed; word-wrap:break-word;">
+<thead>
+<tr>
+<th style="text-align:center;">Index</th>
+<th style="text-align:center;">Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">PR - Polarized Ratio</td>
+<td style="text-align:center;">$\displaystyle \frac{\sigma^{0}_{VH}}{\sigma^{0}_{VV}}$</td>
+</tr>
+<tr>
+<td style="text-align:left;">NDPI - Normalized Difference Polarized Index</td>
+<td style="text-align:center;">$\displaystyle \frac{\sigma^{0}_{VV} - \sigma^{0}_{VH}}{\sigma^{0}_{VV} + \sigma^{0}_{VH}}$</td>
+</tr>
+<tr>
+<td style="text-align:left;">NVHI - Normalized VH Index</td>
+<td style="text-align:center;">$\displaystyle \frac{\sigma^{0}_{VH}}{\sigma^{0}_{VV} + \sigma^{0}_{VH}}$</td>
+</tr>
+<tr>
+<td style="text-align:left;">NVVI - Normalized VV Index</td>
+<td style="text-align:center;">$\displaystyle \frac{\sigma^{0}_{VV}}{\sigma^{0}_{VV} + \sigma^{0}_{VH}}$</td>
+</tr>
+<tr>
+<td style="text-align:left;">RVI - Radar Vegetation Index</td>
+<td style="text-align:center;">$\displaystyle \frac{4 \cdot \sigma^{0}_{VH}}{\sigma^{0}_{VV} + \sigma^{0}_{VH}}$</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+These indices characterize the scattering behavior of radar signals under different wetland flooding conditions, enabling pixel-level water detection.
+
+## Tool functions
+The WetSAT-ML package contains four main functions. Each function has practical examples of usage within the documentation:
+
+| Function                     | Description                                                                                                                                                                    |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **`radar_index_stack`**      | Calculates radar-derived indices (PR, NDPI, NVHI, NVVI, RVI) from Sentinel-1 VV and VH backscatter and extracts median index values within a buffer around reference stations. |
+| **`train_rf_model`**         | Trains a Random Forest classifier using radar-derived indices to detect water presence. Returns the trained model, overall accuracy, and variable importance.              |
+| **`classify_water_surface`** | Applies the trained Random Forest model to classify water and non-water pixels at the image level. Produces wetland flooding maps and water permanence layers.         |
+| **`performWS`**              | Generates time series of flooded areas, intra-annual and inter-annual flooding trends, and hydroperiod statistics.                                                             |
+
+```{r eval=FALSE, include=TRUE}
+
+```
 
 ## Installation
 
-You can install the development version of WETSAT from [GitHub](https://github.com/), using these commands:
+You can install the development version of WetSAT-ML from GitHub:
 
 ```{r eval=FALSE, include=TRUE}
 # install.packages("devtools")
 # devtools::install_github("dazamora/WETSAT")
-```
-
-## Concepts behind WETSAT tool
-The tool  processes radar satellite data from the Sentinel-1 mission to generate wetland flooding extent maps, water permanence maps, and quantify key hydrological parameters, including flooded area time series, hydroperiods, and intra- and inter-annual wetland area trends. The algorithm will use machine learning models to characterize the scattering behavior of the radar signal for different wetland flooding conditions, enabling a pixel-level water detection in the satellite images @rs10050797.
-
-In this study we not only included the backscatter observations from VV and VH channels but also the indices 
-
-```{r fig.3, echo=FALSE, fig.align= "center", fig.height=4, fig.width=6, dpi = 600}
-name.index <- c("Polarized Ratio (PR) - ", "Normalized Difference Polarized Index (NDPI)",
-                "Normalized VH Index (NVHI)", "Normalized VV Index (NVVI)", 
-                "Radar Vegetation Index (RVI)")
-equations <- c(expression(italic(paste(frac(sigma[VH]^0,sigma[VV]^0), sep = ""))),
-               expression(italic(paste(frac(sigma[VV]^0 - sigma[VH]^0,sigma[VV]^0 + sigma[VV]^0), sep =""))), expression(italic(paste(frac(sigma[VH]^0, sigma[VV]^0 + sigma[VV]^0), sep = ""))),
-               expression(italic(paste(frac(sigma[VV]^0, sigma[VV]^0 + sigma[VV]^0)), sep="")),
-               expression(italic(paste(frac(4*sigma[VH]^0, sigma[VV]^0 + sigma[VV]^0)), sep="")))
-
-par(mar=c(0.6,0.6,0.6,0.6)+0.1)
-plot(0:4,c(1:5), yaxt = "n", xaxt = "n", type = "n",bty= "n", ylab = "", xlab = "", ylim = c(0, 6))
-text(rep(0,5),c(1:5),labels = name.index, adj = c(0, 0.1), font = 2)
-text(rep(3,5),c(1:5),labels = equations, adj = c(0, 0.1), cex = 0.8) 
-
-```    
-
-## WETSAT tool functions
-WETSAT package contains XX functions, most of them have a practical example about their usage. The functions are:
-
-* `radar_index_stack`: XXXXXX
-* `train_rf_model`: XXXXXX
-* `classify_water_surface`: XXXXXX
-* `performWS`: XXXXXX
-
-
-```{r eval=FALSE, include=TRUE}
-
 ```
 
 ## Dataset
