@@ -18,14 +18,16 @@
 
 <td align="center" style="vertical-align: middle; padding-left: 18px; padding-right: 18px; text-align: center;">
 
-<!-- Nuevo título arriba -->
+<!-- Título en Markdown dentro del HTML -->
+<h1 style="margin-bottom: 6px; text-align: center;">
 
-<span style="font-size: 40px; font-weight: bold; display: block; margin-bottom: 6px;">
-WetSAT-ML </span> <!-- Frase original abajo -->
-<span style="font-size: 18px;"> <strong>W</strong>etlands flooding
-<strong>e</strong>xtent and <strong>t</strong>rends using
-<strong>SAT</strong>ellite data and <strong>M</strong>achine
-<strong>L</strong>earning </span>
+WetSAT-ML
+</h1>
+
+<!-- Frase original abajo --> <span style="font-size: 18px;">
+<strong>W</strong>etlands flooding <strong>e</strong>xtent and
+<strong>t</strong>rends using <strong>SAT</strong>ellite data and
+<strong>M</strong>achine <strong>L</strong>earning </span>
 </td>
 
 <!-- Imagen derecha -->
