@@ -1,25 +1,37 @@
-#' @name 
-#' Train_rf
-#' 
+#' @name train_rf_model
+#'
 #' @title 
-#' Training random forest algorithm to estimate water presence in wetlands ecosystems using radar data
-#' 
+#' Training a Random Forest model to detect water presence using radar-derived indices
+#'
 #' @description
-#' A short description...
-#' 
+#' This function trains a Random Forest classifier to estimate water presence in wetland ecosystems 
+#' using radar-derived indices from Sentinel-1 data. The function is part of the WetSAT-ML project from SEI 
+#' and is designed to work with the outputs of the \code{radar_index_stack} function. It uses the 
+#' calculated backscatter indices (VV, VH, and derived indices) as predictor variables and a binary 
+#' water presence label (1 = water, 0 = no water) as the response variable. The function performs 
+#' model training, testing, and evaluation, returning both the trained model and its performance metrics.
 #'
-#' @param training_data 
-#' @param ntree 
-#' @param por.train 
-#' @param plot.out 
-#' @param print.CM 
-#' @param mtry 
+#' @param training_data A data frame containing the training dataset. The first column must be a 
+#'                      factor representing water presence (1 = water, 0 = no water), and the remaining 
+#'                      columns must correspond to the predictor variables (radar-derived indices).
+#' @param ntree Integer. The number of trees to grow in the Random Forest model. Default is \code{500}.
+#' @param por.train Numeric value between 0 and 1 specifying the proportion of the dataset used for model training.
+#'                  The remaining portion is used for model validation. Default is \code{0.7} (70% training / 30% validation).
+#' @param mtry Integer specifying the number of variables randomly selected as candidates at each split. Default is \code{3}.
+#' @param plot.out A variable importance plot is generated based on the trained model. Default is \code{TRUE}.
+#' @param print.CM The function prints the confusion matrix and variable importance metrics. Default is \code{TRUE}.
 #'
-#' @return
-#' @export
-#' 
-#' @author David Zamora <david.zamora@sei.org> \cr
-#' Sebastian Palomino <sebastian.palomino@sei.org> \cr
+#' @return 
+#' A list containing:
+#' \itemize{
+#'   \item \strong{model}: The trained Random Forest model object.
+#'   \item \strong{accuracy}: The overall accuracy of the model evaluated on the validation dataset.
+#'   \item \strong{training.set}: The row indices of the observations used for model training.
+#' }
+#'
+#' @author 
+#' David Zamora <david.zamora@sei.org> \cr
+#' Sebastian Palomino-Angel <sebastian.palomino@sei.org>
 #'
 #' @references reference
 #' \itemize{
