@@ -1,23 +1,32 @@
-#' @name 
-#' radar_index_stack
-#' 
-#' @title 
-#' Indexes stack of backscatter and data frame with indexes values by hydrology station
-#' 
-#' @description
-#' A short description...
-#' 
-#' @param VV is the backscatter of the signal transmitted and recived vertical
-#' @param VH 
-#' @param index  \cite{(Mayer et al., 1974)}
-#' @param station 
-#' @param buff 
+#' @name radar_index_stack
 #'
-#' @return
-#' @export
-#' 
-#' @author David Zamora <david.zamora@sei.org> \cr
-#' Sebastian Palomino <sebastian.palomino@sei.org> \cr
+#' @title 
+#' Radar Backscatter Indices and Station-Based Extraction
+#'
+#' @description
+#' This function calculates a set of radar-derived indices from dual-polarization backscatter data 
+#' (VV and VH) expressed as sigma naught (σ⁰) in decibels (dB). It computes the selected indices 
+#' for each pixel and extracts the median values of these indices within a buffer around each 
+#' reference station. The resulting data can be used for model training or further analysis.
+#'
+#' @param VV A RasterStack of VV-polarized backscatter images represented as sigma naught (σ⁰), expressed in decibels (dB).
+#' @param VH A RasterStack of VH-polarized backscatter images represented as sigma naught (σ⁰), expressed in decibels (dB).
+#' @param index A character vector specifying the radar indices to calculate from VV and VH backscatter. 
+#'              Available options are: "PR", "NDPI", "NVHI", "NVVI", and "RVI" \cite{Mayer et al., 1974}. 
+#' @param station An sf point object representing the location of reference stations. The attribute table contains only the station name.
+#' @param buff Buffer radius in meters used to extract the median of the indices around each station point. Recommended value: 100.
+#'
+#' @return 
+#' A list with two components:
+#' \itemize{
+#'   \item \strong{stack.index}: A list containing the calculated radar indices as RasterLayers.
+#'   \item \strong{matrix.index.station}: A data frame with the median values of each index 
+#'         extracted within the buffer around each reference station.
+#' }
+#'
+#' @author 
+#' David Zamora <david.zamora@sei.org> \cr
+#' Sebastian Palomino <sebastian.palomino@sei.org>
 #'
 #' @references reference
 #' \itemize{
