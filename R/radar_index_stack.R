@@ -7,7 +7,9 @@
 #' This function calculates a set of radar-derived indices from dual-polarization backscatter data 
 #' (VV and VH) expressed as sigma naught (σ⁰) in decibels (dB). It computes the selected indices 
 #' for each pixel and extracts the median values of these indices within a buffer around each 
-#' reference station.
+#' reference station. The function is part of the WetSAT-ML project from SEI, and its outputs are designed 
+#' to be used as inputs for the \code{Train_rf} function to train a Random Forest model for detecting 
+#' water presence based on Sentinel-1 data.
 #'
 #' @param VV A RasterStack of VV-polarized backscatter images represented as sigma naught (σ⁰), expressed in decibels (dB).
 #' @param VH A RasterStack of VH-polarized backscatter images represented as sigma naught (σ⁰), expressed in decibels (dB).
