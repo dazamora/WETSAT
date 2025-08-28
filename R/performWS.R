@@ -10,16 +10,16 @@
 #' @export
 #'
 #' @examples
-performWS <- function(rf_model, training_data, data.val, data.cal, plot = TRUE){
+performWS <- function(rf_model, training_data, data.cal, data.val, plot = TRUE){
   
   if(class(rf_model)[2]=="randomForest"){
-    cli::cli_bullets(c("v"= "The first column is a {.cls {class(model.rf)[2]}} class"))
+    cli::cli_bullets(c("v"= "The first column is a {.cls {class(rf_model)[2]}} class"))
     cli::cli_h1("Random Forest Model Information \n The model has been trained with the following parameters:")
     cli::cat_print(rownames(rf_model$importance))
   } else{
     cli::cli_abort(c(
-      "!" = "{.arg model.rf} must be a randomForest object.",
-      "i" = "You provided an object of class {.cls {class(model.rf)}}."
+      "!" = "{.arg rf_model} must be a randomForest object.",
+      "i" = "You provided an object of class {.cls {class(rf_model)}}."
       ))
   }
   
