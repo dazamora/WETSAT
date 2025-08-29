@@ -26,7 +26,7 @@ classify_water_surface <- function(s1_data, rf_model, output_dir = "./RESULTS/Te
   radar_df_clean <- na.omit(radar_df)
   
   # Rename columns to match training data
-  names(radar_df_clean) <- c("X","Y", names(rf_model$forest$xlevels))
+  names(radar_df_clean) <- c("X","Y", names(s1_data))
   
   # Predict water surface
   require(randomForest)
@@ -37,7 +37,6 @@ classify_water_surface <- function(s1_data, rf_model, output_dir = "./RESULTS/Te
   all_predictions <- as.data.frame(all_predictions)
   all_predictions[-na_positions, 3] <- water_prediction[,2]
   all_predictions[,c(1,2)] <- radar_df[,c(1,2)]
-  crs_objetivo <- terra::crs(s1_data[[1]])
   raster.output <- terra::rast(all_predictions, type="xyz", crs = crs.def)
   
   water_binary <- raster.output > 0.5  # Probability of water > 0.5
