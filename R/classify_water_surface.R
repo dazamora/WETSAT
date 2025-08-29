@@ -3,13 +3,16 @@
 #' @param s1_data 
 #' @param rf_model 
 #' @param output_dir 
+#' @param plots 
+#' @param save 
+#' @param crs.def 
 #'
 #' @return
 #' @export
 #'
 #' @examples
 #' 
-classify_water_surface <- function(s1_data, rf_model, output_dir = "./RESULTS/Test") {
+classify_water_surface <- function(s1_data, rf_model, output_dir = "./RESULTS/Test", save = FALSE, plots = c(1, 2), crs.def = "+proj=utm +zone=17 +datum=WGS84 +units=m +no_defs") {
   
   # Create output directory if it doesn't exist
   if(!dir.exists(output_dir)) dir.create(output_dir)
@@ -17,26 +20,27 @@ classify_water_surface <- function(s1_data, rf_model, output_dir = "./RESULTS/Te
   radar_df <- as.data.frame(s1_data, xy = TRUE)
   
   # Store NA positions to restore them later
-  na_positions <- which(is.na(radar_df[,3]))
+  na_positions <- which(is.na(radar_df[,5]))
   
   # Remove NA values for prediction
   radar_df_clean <- na.omit(radar_df)
   
   # Rename columns to match training data
-  names(radar_df_clean) <- c("X","Y",names(rf_model$model$forest$xlevels))
+  names(radar_df_clean) <- c("X","Y", names(rf_model$forest$xlevels))
   
   # Predict water surface
-  water_prediction <- predict(s1_data, radar_df_clean, type = "prob")
+  require(randomForest)
+  water_prediction <- predict(rf_model, radar_df_clean, type = "prob")
   
   # Create a vector to hold all predictions (including NAs)
-  all_predictions <- rep(NA, nrow(radar_df))
-  all_predictions[-na_positions] <- as.character(water_prediction)
+  all_predictions <- matrix(NA, nrow(radar_df), 3)
+  all_predictions <- as.data.frame(all_predictions)
+  all_predictions[-na_positions, 3] <- water_prediction[,2]
+  all_predictions[,c(1,2)] <- radar_df[,c(1,2)]
+  crs_objetivo <- terra::crs(s1_data[[1]])
+  raster.output <- terra::rast(all_predictions, type="xyz", crs = crs.def)
   
-  
-  
-  # Predict water surface
-  water_prediction <- predict(s1_data, rf_model, type = "prob")
-  water_binary <- water_prediction[[2]] > 0.5  # Probability of water > 0.5
+  water_binary <- raster.output > 0.5  # Probability of water > 0.5
   
   # Save water classification
   writeRaster(water_binary, 
