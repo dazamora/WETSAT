@@ -42,13 +42,12 @@ classify_water_surface <- function(s1_data, rf_model, output_dir = "./RESULTS/Te
   water_binary <- raster.output > 0.5  # Probability of water > 0.5
   
   # Save water classification
-  writeRaster(water_binary, 
-              filename = file.path(output_dir, "water_classification.tif"), 
-              format = "GTiff", 
+  terra::writeRaster(water_binary, 
+              filename = file.path(output_dir, "water_classification_p.tif"), 
               overwrite = TRUE)
   
   # Calculate water surface area
-  pixel_area <- res(water_binary)[1] * res(water_binary)[2]  # m²
+  pixel_area <- raster::res(water_binary)[1] * raster::res(water_binary)[2]  # m²
   water_pixels <- sum(values(water_binary) == 1, na.rm = TRUE)
   water_area_m2 <- water_pixels * pixel_area
   water_area_km2 <- water_area_m2 / 1000000
